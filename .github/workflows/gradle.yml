@@ -38,6 +38,6 @@ jobs:
 
         # запускаем SUT в фоновом режиме
       - name: Run Tests
-        run:  chmod +x gradlew ./gradlew test --info
+        run: chmod +x gradlew ./gradlew test --info
       - name: Build with Gradle
         run: chmod +x gradlew && ./gradlew build
