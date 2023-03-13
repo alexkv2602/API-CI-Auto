@@ -29,7 +29,14 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       - name: Build with Gradle
-        run:  chmod +x gradlew
-        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-        with:
-          arguments: build
+        run: chmod +x gradlew
+    build: off  # будем использовать свой скрипт сборки
+
+    install:
+      # запускаем SUT (& означает, что в фоновом режиме не блокируем терминал для запуска тестов)
+      - java -jar ./artifacts/app-mbank.jar &
+      - chmod +x gradlew
+
+    build_script:
+
+      - ./gradlew test --info  # запускаем тест, флаг --info позволяет выводить больше информации
