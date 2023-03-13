@@ -28,15 +28,14 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-      - name: Build with Gradle
-        run: chmod +x gradlew && ./gradlew build
+      - name: Run SUT
+        run: java -jar ./artifacts/app-mbank.jar &
         # сохраняем артефакты после сборки
         # указываем путь к jar файлу в зависимости от настроек сборки
         # например, если используется плагин application, то путь будет ./build/libs/app-mbank.jar
         # или ./build/libs/<имя приложения>.jar
         # если путь к jar файлу известен заранее, то его можно указать как аргумент в скрипте сборки
-      - name: Run SUT
-        run: java -jar ./artifacts/app-mbank.jar &
+
         # запускаем SUT в фоновом режиме
       - name: Run Tests
         run: ./gradlew test --info
